@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crane Logistics | Kravu pārvadājumi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navigācijas josla */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin-right: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #000;
+        }
+
+        /* Valodu izvēlne */
+        .lang-switcher {
+            display: flex;
+            gap: 5px;
+            margin-left: 10px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: 1px solid #ccc;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background-color: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        /* Galvenais fona bloks (Hero) */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('fons.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 10%;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            max-width: 600px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            max-width: 500px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #111111;
+            padding: 14px 35px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #111;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Pakalpojumi */
+        .services {
+            padding: 100px 10% 80px 10%;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: #f9f9f9;
+            padding: 40px 30px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Kontakti */
+        .contact {
+            padding: 100px 10%;
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .contact p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            font-size: 1.8rem;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+
+        .contact-info a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 16px; /* Šī rinda samazinās izmēru */
+    word-break: normal; /* Šī rinda novērsīs pārlaušanu ⁠*/ }⁠
+
+        .contact-info a:hover {
+            color: #aaa;
+        }
+
+        footer {
+            background-color: #0a0a0a;
+            color: #555;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            border-top: 1px solid #222;
+        }
+
+        /* Mobilā versija */
+        @media (max-width: 768px) {* {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            nav a { display: none; } /* Paslēpj teksta linkus uz tel, paliek tikai valodas */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigācija -->
+    <header>
+        <div class="logo-container" onclick="scrollToSection('sakums')">
+            <img src="logo.png" alt="Crane Logistics" class="logo-img">
+        </div>
+        <nav>
+            <a href="#sakums" id="nav-home">Sākums</a>
+            <a href="#pakalpojumi" id="nav-services">Pakalpojumi</a>
+            <a href="#kontakti" id="nav-contact">Kontakti</a>
+            
+            <!-- Valodu pogas -->
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="changeLang('lv')">LV</button>
+                <button class="lang-btn" onclick="changeLang('en')">EN</button>
+                <button class="lang-btn" onclick="changeLang('ru')">RU</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero / Sākums -->
+    <section class="hero" id="sakums">
+        <h1 id="hero-title">Droši un precīzi kravu pārvadājumi Baltijā</h1>
+        <p id="hero-sub">Efektīvi loģistikas risinājumi un regulāri līniju pārvadājumi. Tavs uzticamais partneris ceļā.</p>
+        <button class="btn" id="hero-btn" onclick="scrollToSection('kontakti')">Sazināties ar mums</button>
+    </section>
+
+    <!-- Pakalpojumi -->
+    <section class="services" id="pakalpojumi">
+        <h2 id="services-title">Mūsu pakalpojumi</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3 id="s1-title">Līniju pārvadājumi</h3>
+                <p id="s1-desc">Regulāri un precīzi reisi starp lielākajiem šķirošanas centriem un termināļiem Baltijā.</p>
+            </div>
+            <div class="service-card">
+                <h3 id="s2-title">Kurjeru loģistika</h3>
+                <p id="s2-desc">Paku un apjomīgu sūtījumu ātra un droša nogādāšana klientiem optimālos termiņos.</p>
+            </div>
+            <div class="service-card">
+                <h3 id="s3-title">B2B Risinājumi</h3>
+                <p id="s3-desc">Pielāgoti transporta pakalpojumi uzņēmumiem ilgtermiņa sadarbības ietvaros.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakti -->
+    <section class="contact" id="kontakti">
+        <h2 id="contact-title">Sāksim sadarbību!</h2>
+        <p id="contact-sub">Sazinieties ar mums, lai uzzinātu vairāk par maršrutiem un tarifiem.</p>
+        <div class="contact-info">
+            <p><a href="tel:+37120602081">+371 20602081</a></p>
+            <p><a href="mailto:aerocranelogistics@gmail.com">aerocranelogistics@gmail.com</a></p>
+        </div>
+    </section>
+
+    <!-- Kājene -->
+    <footer>
+        <p>&copy; 2026 SIA Aero Crane Logistics. All rights reserved.</p>
+    </footer>
+
+    <!-- Valodu un interaktivitātes skripts -->
+    <script>
+        // Tulkojumu datubāze
+        const translations = {
+            lv: {
+                navHome: "Sākums", navServices: "Pakalpojumi", navContact: "Kontakti",
+                heroTitle: "Droši un precīzi kravu pārvadājumi Baltijā",
+                heroSub: "Efektīvi loģistikas risinājumi un regulāri līniju pārvadājumi. Tavs uzticamais partneris ceļā.",
+                heroBtn: "Sazināties ar mums",
+                servicesTitle: "Mūsu pakalpojumi",
+                s1Title: "Līniju pārvadājumi", s1Desc: "Regulāri un precīzi reisi starp lielākajiem šķirošanas centriem un termināļiem Baltijā.",
+                s2Title: "Kurjeru loģistika", s2Desc: "Paku un apjomīgu sūtījumu ātra un droša nogādāšana klientiem optimālos termiņos.",
+                s3Title: "B2B Risinājumi", s3Desc: "Pielāgoti transporta pakalpojumi uzņēmumiem ilgtermiņa sadarbības ietvaros.",
+                contactTitle: "Sāksim sadarbību!", contactSub: "Sazinieties ar mums, lai uzzinātu vairāk par maršrutiem un tarifiem."
+            },
+            en: {
+                navHome: "Home", navServices: "Services", navContact: "Contact",
+                heroTitle: "Safe and Precise Cargo Transport in the Baltics",
+                heroSub: "Efficient logistics solutions and regular linehaul services. Your trusted partner on the road.",
+                heroBtn: "Contact Us",
+                servicesTitle: "Our Services",
+                s1Title: "Linehaul Transport", s1Desc: "Regular and precise trips between the largest sorting centers and terminals in the Baltics.",
+                s2Title: "Courier Logistics", s2Desc: "Fast and secure delivery of parcels and bulky shipments to customers within optimal timeframes.",
+                s3Title: "B2B Solutions", s3Desc: "Tailored transport services for businesses within long-term cooperation frameworks.",
+                contactTitle: "Let's Start Working Together!", contactSub: "Contact us to find out more about routes and rates."
+            },
+            ru: {
+                navHome: "Главная", navServices: "Услуги", navContact: "Контакты",
+                heroTitle: "Надежные и точные грузоперевозки по Балтии",
+                heroSub: "Эффективные логистические решения и регулярные линейные перевозки. Ваш надежный партнер в пути.",
+                heroBtn: "Связаться с нами",
+                servicesTitle: "Наши услуги",
+                s1Title: "Линейные перевозки", s1Desc: "Регулярные и точные рейсы между крупнейшими сортировочными центрами и терминалами Балтии.",
+                s2Title: "Курьерская логистика", s2Desc: "Быстрая и безопасная доставка посылок и крупногабаритных грузов клиентам в оптимальные сроки.",
+                s3Title: "B2B Решения", s3Desc: "Индивидуальные транспортные услуги для бизнеса в рамках долгосрочного сотрудничества.",
+                contactTitle: "Начнем сотрудничество!", contactSub: "Свяжитесь с нами, чтобы узнать больше о маршрутах и тарифах."
+            }
+        };
+
+        // Funkcija, kas nomaina valodu uz lapas
+        function changeLang(lang) {
+            // Maina tekstus
+            document.getElementById('nav-home').innerText = translations[lang].navHome;
+            document.getElementById('nav-services').innerText = translations[lang].navServices;
+            document.getElementById('nav-contact').innerText = translations[lang].navContact;
+            document.getElementById('hero-title').innerText = translations[lang].heroTitle;
+            document.getElementById('hero-sub').innerText = translations[lang].heroSub;
+            document.getElementById('hero-btn').innerText = translations[lang].heroBtn;
+            document.getElementById('services-title').innerText = translations[lang].servicesTitle;
+            document.getElementById('s1-title').innerText = translations[lang].s1Title;
+            document.getElementById('s1-desc').innerText = translations[lang].s1Desc;
+            document.getElementById('s2-title').innerText = translations[lang].s2Title;
+            document.getElementById('s2-desc').innerText = translations[lang].s2Desc;
+            document.getElementById('s3-title').innerText = translations[lang].s3Title;
+            document.getElementById('s3-desc').innerText = translations[lang].s3Desc;
+            document.getElementById('contact-title').innerText = translations[lang].contactTitle;
+            document.getElementById('contact-sub').innerText = translations[lang].contactSub;
+
+            // Maina aktīvās pogas izskatu
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Funkcija plūstošai skrollēšanai uz sadaļām
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
